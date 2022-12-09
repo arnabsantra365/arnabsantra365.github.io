@@ -34,7 +34,7 @@
 
    <p>Give the polarity and input voltages for primary and secondary side of Transformer.</p>
 
-   <div class="card">
+   
    <div class="form ">
    <label class="polarity"for="polarity">Choose a polarity:</label>
   <select id="select1" onchange="enabled(this)" class="bg-info">
@@ -57,20 +57,47 @@
   <option value="Sup">Step Up</option>
   <option value="Sdown">Step Down</option>
   </select>
-
-   <br><br>
  </div>
-  </div>
-  <div class="new2" id="auto2" >
-  <div class="new" id="auto" >
-    <label for="pvolt1">Primary Voltage of Auto:</label>
-  <input type="number"  id="pvolt1"  class="pvolt1" ><br><br>
-  </div>
-  <div class="new1" id="auto1" >
-  <label for="svolt1">Secondary Voltage of Auto:</label>
-  <input type="number"  id="svolt1" class="svolt1"><br><br>
-  </div>
-  </div>
+  <br>
+
+  <span class="new2" id="auto2" >
+  <span class="new" id="auto" >
+    <label for="pvolt1">Choose Output(Primary) side Voltage of Auto-Transformer:</label>
+    <select id="select3"  class="bg-info">
+      <option value="none" selected disabled hidden>Select an Option</option>
+      <option value="Sp1">Primary</option>
+      <option value="Sd1">Secondary</option>
+    </select><br><br>
+  </span>
+  <span class="new1" id="auto1" >
+  <label for="svolt1">Choose Output(Secondary) side Voltage of Auto-Transformer:</label>
+  <select id="select4"  class="bg-info">
+    <option value="none" selected disabled hidden>Select an Option</option>
+    <option value="Sp2">Primary</option>
+    <option value="Sd2">Secondary</option>
+  </select><br><br>
+  </span>
+  </span>
+
+  <span class="new5" id="auto5" >
+  <span class="new3" id="auto3" >
+    <label for="pvolt2">Choose Output(Secondary) side Voltage of Auto-Transformer:</label>
+    <select id="select5"  class="bg-info">
+      <option value="none" selected disabled hidden>Select an Option</option>
+      <option value="Sp3">Primary</option>
+      <option value="Sd3">Secondary</option>
+    </select><br><br>
+  </span>
+  <span class="new4" id="auto4" >
+  <label for="svolt2">Choose Output(Primary) side Voltage of Auto-Transformer:</label>
+  <select id="select6"  class="bg-info">
+    <option value="none" selected disabled hidden>Select an Option</option>
+    <option value="Sp4">Primary</option>
+    <option value="Sd4">Secondary</option>
+  </select><br><br>
+  </span>
+  </span>
+
   <br>
   <button onclick="answer()"> Submit </button>
   
@@ -88,9 +115,11 @@
       console.log(ok.value);
       if(ok.value=="Same"){
       document.getElementById('auto2').classList.remove('new2');
+      document.getElementById('auto5').classList.add('new5');
     }
     else{
       document.getElementById('auto2').classList.add('new2');
+      document.getElementById('auto5').classList.remove('new5');
     }
     }
 function disablebutton(dis){
@@ -98,10 +127,14 @@ function disablebutton(dis){
     if(dis.value=="Sup"){
       document.getElementById('auto').classList.remove('new');
       document.getElementById('auto1').classList.add('new1');
+      document.getElementById('auto3').classList.remove('new3');
+      document.getElementById('auto4').classList.add('new4');
     }
     else{
       document.getElementById('auto1').classList.remove('new1');
       document.getElementById('auto').classList.add('new');
+      document.getElementById('auto4').classList.remove('new4');
+      document.getElementById('auto3').classList.add('new3');
     }
   }
     let resetButton;
@@ -109,9 +142,7 @@ function answer(){
 
   const primary1 =parseFloat(document.querySelector('.pvolt').value);
   const secondary1 =parseFloat(document.querySelector('.svolt').value);
- const pvolt2 =parseFloat(document.querySelector('.pvolt1').value);
- const svolt2 =parseFloat(document.querySelector('.svolt1').value);
- const kva1 =parseFloat(document.querySelector('.kva').value);
+  const kva1 =parseFloat(document.querySelector('.kva').value);
 
   const selectElement1 = document.querySelector('#select2');
         output1 = selectElement1.value;
@@ -125,25 +156,48 @@ function answer(){
           let i1=kva1/primary1;
           let i2=kva1/secondary1;
           let iprimary=i1+i2;
-          let isecondary=i1+i2-(kva1/pvolt2);
-          let kvaAuto=(i1+i2)*pvolt2;
-        document.querySelector('.primary').textContent = "maximum primary voltage rating:"+" "+pvolt2+"Volts";
+          if(document.querySelector('#select3').value=="Sp1"){
+          let isecondary=i2;
+          let kvaAuto=(i1+i2)*primary1;
+        document.querySelector('.primary').textContent = "maximum primary voltage rating:"+" "+primary1+"Volts";
         document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+primary1+"+"+secondary1+"="+sum+"Volts";
-        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"+"+i2.toFixed(2)+")"+"*"+pvolt2+"="+kvaAuto.toFixed(2)+"KVA";
+        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"+"+i2.toFixed(2)+")"+"*"+primary1+"="+kvaAuto.toFixed(2)+"KVA";
         document.querySelector('.pcurrent').textContent = "maximum primary current rating of Auto-Transformer:"+i1.toFixed(2)+"+"+i2.toFixed(2)+"="+iprimary.toFixed(2)+"A";
         document.querySelector('.scurrent').textContent = "maximum secondary current rating of Auto-Transformer:"+" "+isecondary.toFixed(2)+"A";
           }
           else{
-          {
+            let isecondary=i1;
+          let kvaAuto=(i1+i2)*secondary1;
+        document.querySelector('.primary').textContent = "maximum primary voltage rating:"+" "+secondary1+"Volts";
+        document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+primary1+"+"+secondary1+"="+sum+"Volts";
+        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"+"+i2.toFixed(2)+")"+"*"+secondary1+"="+kvaAuto.toFixed(2)+"KVA";
+        document.querySelector('.pcurrent').textContent = "maximum primary current rating of Auto-Transformer:"+i1.toFixed(2)+"+"+i2.toFixed(2)+"="+iprimary.toFixed(2)+"A";
+        document.querySelector('.scurrent').textContent = "maximum secondary current rating of Auto-Transformer:"+" "+isecondary.toFixed(2)+"A";
+
+          }
+        }
+          else{
+          
           let sum=primary1+secondary1;
           let i1=kva1/primary1;
           let i2=kva1/secondary1;
           let isecondary=i1+i2;
-          let iprimary=i1+i2-(kva1/svolt2);
-          let kvaAuto=(i1+i2)*svolt2;
+
+          if(document.querySelector('#select4').value=="Sd2"){
+          let iprimary=i1;
+          let kvaAuto=(i1+i2)*secondary1;
         document.querySelector('.primary').textContent = "maximum primary voltage rating:"+primary1+"+"+secondary1+"="+sum+"Volts";
-        document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+" "+svolt2+"Volts";
-        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"+"+i2.toFixed(2)+")"+"*"+svolt2+"="+kvaAuto.toFixed(2)+"KVA";
+        document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+" "+secondary1+"Volts";
+        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"+"+i2.toFixed(2)+")"+"*"+secondary1+"="+kvaAuto.toFixed(2)+"KVA";
+        document.querySelector('.scurrent').textContent = "maximum secondary current rating of Auto-Transformer:"+i1.toFixed(2)+"+"+i2.toFixed(2)+"="+isecondary.toFixed(2)+"A";
+        document.querySelector('.pcurrent').textContent = "maximum primary current rating of Auto-Transformer:"+" "+iprimary.toFixed(2)+"A";
+          }
+          else{
+            let iprimary=i2;
+          let kvaAuto=(i1+i2)*primary1;
+        document.querySelector('.primary').textContent = "maximum primary voltage rating:"+primary1+"+"+secondary1+"="+sum+"Volts";
+        document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+" "+primary1+"Volts";
+        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"+"+i2.toFixed(2)+")"+"*"+primary1+"="+kvaAuto.toFixed(2)+"KVA";
         document.querySelector('.scurrent').textContent = "maximum secondary current rating of Auto-Transformer:"+i1.toFixed(2)+"+"+i2.toFixed(2)+"="+isecondary.toFixed(2)+"A";
         document.querySelector('.pcurrent').textContent = "maximum primary current rating of Auto-Transformer:"+" "+iprimary.toFixed(2)+"A";
           }
@@ -156,48 +210,55 @@ function answer(){
           let diff=Math.abs(primary1-secondary1);
           let i1=kva1/primary1;
           let i2=kva1/secondary1;
-          let iprimary=Math.abs(i1-i2);
-          let mini=Math.min(primary1,secondary1,diff);
-          let kvaAuto=iprimary*diff;
-          if (mini==diff)
-          {
+          let isecondary=Math.abs(i1-i2);
+          if(document.querySelector('#select5').value=="Sp3"){
+            let iprimary=i2;
+          let kvaAuto=primary1*isecondary;
+         
         document.querySelector('.primary').textContent = "maximum primary voltage rating:"+" "+diff+"Volts";
-        document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+primary1+"OR"+secondary1+"Volts";
-        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"-"+i2.toFixed(2)+")"+"*"+diff+"="+kvaAuto.toFixed(2)+"KVA";
+        document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+primary1+"Volts";
+        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"-"+i2.toFixed(2)+")"+"*"+primary1+"="+kvaAuto.toFixed(2)+"KVA";
         document.querySelector('.pcurrent').textContent = "maximum primary current rating of Auto-Transformer:"+i1.toFixed(2)+"-"+i2.toFixed(2)+"="+iprimary.toFixed(2)+"A";
-        //document.querySelector('.scurrent').textContent = "maximum secondary current rating of Auto-Transformer:"+" "+isecondary+"A";
+        document.querySelector('.scurrent').textContent = "maximum secondary current rating of Auto-Transformer:"+" "+isecondary+"A";
           }
           else{
-        document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+" "+diff+"Volts";
-        document.querySelector('.primary').textContent = "maximum primary voltage rating:"+primary1+"OR"+secondary1+"Volts";
-        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"-"+i2.toFixed(2)+")"+"*"+diff+"="+kvaAuto.toFixed(2)+"KVA";
+            let iprimary=i1;
+          let kvaAuto=isecondary*secondary1;
+        document.querySelector('.primary').textContent = "maximum primary voltage rating:"+" "+diff+"Volts";
+        document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+secondary1+"Volts";
+        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"-"+i2.toFixed(2)+")"+"*"+secondary1+"="+kvaAuto.toFixed(2)+"KVA";
         document.querySelector('.pcurrent').textContent = "maximum primary current rating of Auto-Transformer:"+i1.toFixed(2)+"-"+i2.toFixed(2)+"="+iprimary.toFixed(2)+"A";
-
+        document.querySelector('.scurrent').textContent = "maximum secondary current rating of Auto-Transformer:"+" "+isecondary+"A";
           }
         }
+      
           
           else{
           
           let diff=Math.abs(primary1-secondary1);
           let i1=kva1/primary1;
           let i2=kva1/secondary1;
-          let isecondary=Math.abs(i1-i2);
-          let mini=Math.min(primary1,secondary1,diff);
-          let kvaAuto=isecondary*diff;
-          if (mini==diff)
+          let iprimary=Math.abs(i1-i2);
+         
+         
+          if (document.querySelector('#select6').value=="Sp4")
           {
-        document.querySelector('.primary').textContent = "maximum primary voltage rating:"+" "+diff+"Volts";
-        document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+primary1+"OR"+secondary1+"Volts";
-        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"-"+i2.toFixed(2)+")"+"*"+diff+"="+kvaAuto.toFixed(2)+"KVA";
+            let isecondary=i2;
+          let kvaAuto=primary1*iprimary;
+          document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+" "+diff+"Volts";
+        document.querySelector('.primary').textContent = "maximum primary voltage rating:"+primary1+"Volts";
+        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"-"+i2.toFixed(2)+")"+"*"+primary1+"="+kvaAuto.toFixed(2)+"KVA";
         document.querySelector('.scurrent').textContent = "maximum primary current rating of Auto-Transformer:"+i1.toFixed(2)+"-"+i2.toFixed(2)+"="+isecondary.toFixed(2)+"A";
-       // document.querySelector('.pcurrent').textContent = "maximum secondary current rating of Auto-Transformer:"+" "+iprimary+"A";
+        document.querySelector('.pcurrent').textContent = "maximum secondary current rating of Auto-Transformer:"+" "+iprimary+"A";
           }
           else{
+            let isecondary=i1;
+          let kvaAuto=secondary1*iprimary;
         document.querySelector('.secondary').textContent = "maximum secondary voltage rating:"+" "+diff+"Volts";
-        document.querySelector('.primary').textContent = "maximum primary voltage rating:"+primary1+"OR"+secondary1+"Volts";
-        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"-"+i2.toFixed(2)+")"+"*"+diff+"="+kvaAuto.toFixed(2)+"KVA";
-        document.querySelector('.pcurrent').textContent = "maximum primary current rating of Auto-Transformer:"+i1.toFixed(2)+"-"+i2.toFixed(2)+"="+iprimary.toFixed(2)+"A";
-
+        document.querySelector('.primary').textContent = "maximum primary voltage rating:"+secondary1+"Volts";
+        document.querySelector('.power').textContent = "power rating of Auto:"+"("+i1.toFixed(2)+"-"+i2.toFixed(2)+")"+"*"+secondary1+"="+kvaAuto.toFixed(2)+"KVA";
+        document.querySelector('.scurrent').textContent = "maximum secondary current rating of Auto-Transformer:"+i1.toFixed(2)+"-"+i2.toFixed(2)+"="+isecondary.toFixed(2)+"A";
+        document.querySelector('.pcurrent').textContent = "maximum primary current rating of Auto-Transformer:"+" "+iprimary+"A";
           }
           }
           }
