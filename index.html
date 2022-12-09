@@ -14,13 +14,13 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-dark">
     <div class="container-fluid">
-    <span class="navbar-brand text-white " href="#"> 
+    <span class="navbar-brand text-white  " href="#"> 
     <img src="png-clipart-electricity-label-sticker-solar-power-transformer-text-label.png" alt="Transformer Logo" style="width:60px;" class="rounded-pill">
      CALCULATOR</span>
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="navbar-collapse collapse" id="navbarNav" style="">
+      <div class="navbar-collapse collapse" id="navbarNav" >
         <ul class="nav nav-pills">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -30,11 +30,11 @@
     </div>
   </nav>
    </body>
-   <h1>Two Winding Transformer to Auto-Transformer</h1>
+   <h1 class="t1">Two Winding Transformer to Auto-Transformer</h1>
 
-   <p>Give the polarity and input voltages for primary and secondary side of Transformer.</p>
+   <p>Give the Polarity,KVA rating and input voltages for primary and secondary side of Transformer.</p>
 
-   
+   <div class="card final">
    <div class="form ">
    <label class="polarity"for="polarity">Choose a polarity:</label>
   <select id="select1" onchange="enabled(this)" class="bg-info">
@@ -45,11 +45,11 @@
 
   <br><br>
   <label for="pvolt">Primary Voltage:</label>
-  <input type="number" id="pvolt"  class="pvolt"><br><br>
+  <input type="number" id="pvolt" min="1"  class="pvolt" required><br><br>
   <label for="svolt">Secondary Voltage:</label>
-  <input type="number" id="svolt" class="svolt"><br><br>
+  <input type="number" id="svolt"min="1"  class="svolt" required><br><br>
   <label for="kva">Enter KVA rating:</label>
-  <input type="number" id="kva"  class="kva"><br><br>
+  <input type="number" id="kva" min="1"  class="kva" required><br><br>
 
   <label class="step"for="step">Choose the configuration:</label>
   <select id="select2" onchange="disablebutton(this)" class="bg-danger">
@@ -97,13 +97,13 @@
   </select><br><br>
   </span>
   </span>
-
+   </div>
   <br>
   <button onclick="answer()"> Submit </button>
   
    <hr>
 
-   <div class="result row">
+   <div class="card result">
      <div class="primary ">Primary</div>
      <div class="secondary ">Secondary</div>
      <div class="power ">Rating</div>
