@@ -26,8 +26,8 @@ body{
 .final{
   margin-top: 50px;
   margin-bottom: 50px;
-  margin-right: 100px;
-  margin-left: 100px;
+  margin-right: 50px;
+  margin-left: 50px;
   padding: 15px 5px 5px 5px;
   border: 10px solid black;
 }
