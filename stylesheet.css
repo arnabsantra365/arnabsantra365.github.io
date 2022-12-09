@@ -39,7 +39,9 @@ h1 {
   margin: 50px 50px ;
   padding: 15px 5px 5px 5px;
   border: 10px solid black;
-  background-color: #87FAFA;
+  background-color: #51fa14fe;
+  font-weight: 900;
+  font-size: large;
 }
 .final{
   font-weight: 500;
