@@ -58,14 +58,18 @@
   <option value="Sdown">Step Down</option>
   </select>
 
-  <br><br>
+   <br><br>
  </div>
   </div>
+  <div class="new2" id="auto2" >
   <div class="new" id="auto" >
     <label for="pvolt1">Primary Voltage of Auto:</label>
-  <input type="number" disabled="" id="pvolt1"  class="pvolt1" ><br><br>
+  <input type="number"  id="pvolt1"  class="pvolt1" ><br><br>
+  </div>
+  <div class="new1" id="auto1" >
   <label for="svolt1">Secondary Voltage of Auto:</label>
-  <input type="number" disabled="" id="svolt1" class="svolt1"><br><br>
+  <input type="number"  id="svolt1" class="svolt1"><br><br>
+  </div>
   </div>
   <br>
   <button onclick="answer()"> Submit </button>
@@ -83,21 +87,21 @@
     function enabled(ok){
       console.log(ok.value);
       if(ok.value=="Same"){
-      document.getElementById('auto').classList.remove('new');
+      document.getElementById('auto2').classList.remove('new2');
     }
     else{
-      document.getElementById('auto').classList.add('new');
+      document.getElementById('auto2').classList.add('new2');
     }
     }
 function disablebutton(dis){
     console.log(dis.value);
     if(dis.value=="Sup"){
-      document.getElementById('pvolt1').disabled=false;
-      document.getElementById('svolt1').disabled=true;
+      document.getElementById('auto').classList.remove('new');
+      document.getElementById('auto1').classList.add('new1');
     }
     else{
-      document.getElementById('svolt1').disabled=false;
-      document.getElementById('pvolt1').disabled=true;
+      document.getElementById('auto1').classList.remove('new1');
+      document.getElementById('auto').classList.add('new');
     }
   }
     let resetButton;
