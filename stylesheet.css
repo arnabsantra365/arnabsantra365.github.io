@@ -1,7 +1,14 @@
 body{
+
   text-align: center;
  
 }
 .new{
     display: none;
+}
+.new1{
+  display: none;
+}
+.new2{
+  display: none;
 }
