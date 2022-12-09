@@ -1,5 +1,7 @@
 body{
-
+  background-image: url(vecteezy_city-high-voltage-power-plant_15048070_992.jpg);
+  background-size: 2000px 1000px;
+  background-repeat: repeat;
   text-align: center;
  
 }
@@ -20,4 +22,31 @@ body{
 }
 .new4{
   display: none;
+}
+.final{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-right: 200px;
+  margin-left: 200px;
+  padding: 15px 5px 5px 5px;
+  border: 10px solid black;
+}
+h1 {
+  color: #DFFA14;
+  text-shadow: 5px 5px 7px red;
+}
+.result{
+  margin: 50px 50px ;
+  padding: 15px 5px 5px 5px;
+  border: 10px solid black;
+}
+.final{
+  font-weight: 500;
+  font-style: italic;
+  background-color: #87FAFA;
+}
+
+p{
+  font-weight: 900;
+  font-size: large;
 }
